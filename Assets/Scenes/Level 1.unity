@@ -300,6 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 6
   jumpForce: 11
+  jumpSprite: {fileID: -3324982837959096817, guid: 0f33ae22027caa043b24d296d836267a, type: 3}
+  defaultSprite: {fileID: -476690227973578607, guid: 9dcdbf15700b13749a0ebe63f576469c, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
