@@ -27,8 +27,14 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate()
-    { 
+    {
+        JumpAnimation();
+    }
+
+    private void JumpAnimation()
+    {
         float moveX = GameInput.Instance.GetMoveHorizontal();
+        FlipSprite(moveX);
 
         spriteRenderer.sprite = IsGrounded() ? defaultSprite : jumpSprite;
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
@@ -45,4 +51,17 @@ public class Player : MonoBehaviour
     {
         return Mathf.Abs(rb.linearVelocity.y) < 0.01f;
     }
+
+    private void FlipSprite(float moveX)
+    {
+        if (moveX < 0f)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (moveX > 0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
 }
