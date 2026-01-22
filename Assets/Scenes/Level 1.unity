@@ -132,8 +132,9 @@ GameObject:
   - component: {fileID: 140704520}
   - component: {fileID: 140704519}
   - component: {fileID: 140704521}
+  - component: {fileID: 140704522}
   m_Layer: 0
-  m_Name: alienGreen_front_0
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +252,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8359375, y: 1.1796875}
+    oldSize: {x: 0.859375, y: 1.1953125}
     newSize: {x: 0.8359375, y: 1.1796875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -302,6 +303,28 @@ MonoBehaviour:
   jumpForce: 11
   jumpSprite: {fileID: -3324982837959096817, guid: 0f33ae22027caa043b24d296d836267a, type: 3}
   defaultSprite: {fileID: -476690227973578607, guid: 9dcdbf15700b13749a0ebe63f576469c, type: 3}
+--- !u!95 &140704522
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140704516}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fedf3d0f9d96c3447a12484668d31904, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
