@@ -1,21 +1,26 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
-    private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+
     private bool jumpRequested;
+    private bool IsGrounded => Mathf.Abs(rb.linearVelocity.y) < 0.01f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -28,18 +33,25 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        JumpAnimation();
+        HandleMovement();
+        HandleJump();
+        UpdateAnimator();
     }
 
-    private void JumpAnimation()
+    private void HandleMovement()
     {
         float moveX = GameInput.Instance.GetMoveHorizontal();
+
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
         FlipSprite(moveX);
 
-        spriteRenderer.sprite = IsGrounded() ? defaultSprite : jumpSprite;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+        // IsMoving cho Animator
+        animator.SetBool("IsMoving", Mathf.Abs(moveX) > 0.01f);
+    }
 
-        if (jumpRequested && IsGrounded())
+    private void HandleJump()
+    {
+        if (jumpRequested && IsGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
@@ -47,9 +59,9 @@ public class Player : MonoBehaviour
         jumpRequested = false;
     }
 
-    private bool IsGrounded()
+    private void UpdateAnimator()
     {
-        return Mathf.Abs(rb.linearVelocity.y) < 0.01f;
+        animator.SetBool("IsGrounded", IsGrounded);
     }
 
     private void FlipSprite(float moveX)
@@ -63,5 +75,4 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
 }
