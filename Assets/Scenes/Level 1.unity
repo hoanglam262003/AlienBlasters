@@ -252,7 +252,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.859375, y: 1.1953125}
+    oldSize: {x: 0.8359375, y: 1.1796875}
     newSize: {x: 0.8359375, y: 1.1796875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -283,9 +283,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &140704521
 MonoBehaviour:
@@ -300,7 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 6
-  jumpForce: 11
+  jumpForce: 8
+  maxJumps: 1
   jumpSprite: {fileID: -3324982837959096817, guid: 0f33ae22027caa043b24d296d836267a, type: 3}
   defaultSprite: {fileID: -476690227973578607, guid: 9dcdbf15700b13749a0ebe63f576469c, type: 3}
 --- !u!95 &140704522
