@@ -5,7 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 6f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private int maxJumps = 1;
+
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
 
@@ -14,13 +16,18 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     private bool jumpRequested;
-    private bool IsGrounded => Mathf.Abs(rb.linearVelocity.y) < 0.01f;
+    private bool isGrounded;
+    private bool isTouchingWallLeft;
+    private bool isTouchingWallRight;
+
+    private int jumpsRemaining;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        jumpsRemaining = maxJumps;
     }
 
     private void Update()
@@ -42,26 +49,35 @@ public class Player : MonoBehaviour
     {
         float moveX = GameInput.Instance.GetMoveHorizontal();
 
+        if ((moveX < 0f && isTouchingWallLeft) ||
+        (moveX > 0f && isTouchingWallRight))
+        {
+            moveX = 0f;
+        }
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
         FlipSprite(moveX);
 
-        // IsMoving cho Animator
         animator.SetBool("IsMoving", Mathf.Abs(moveX) > 0.01f);
     }
 
     private void HandleJump()
     {
-        if (jumpRequested && IsGrounded)
+        if (jumpRequested && jumpsRemaining > 0)
         {
+            if (isTouchingWallLeft || isTouchingWallRight)
+            {
+                jumpRequested = false;
+                return;
+            }
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            jumpsRemaining--;
         }
-
         jumpRequested = false;
     }
 
     private void UpdateAnimator()
     {
-        animator.SetBool("IsGrounded", IsGrounded);
+        animator.SetBool("IsGrounded", isGrounded);
     }
 
     private void FlipSprite(float moveX)
@@ -75,4 +91,36 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        isGrounded = false;
+        isTouchingWallLeft = false;
+        isTouchingWallRight = false;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+            {
+                isGrounded = true;
+                jumpsRemaining = maxJumps;
+            }
+            if (contact.normal.x > 0.5f)
+            {
+                isTouchingWallLeft = true;
+            }
+            if (contact.normal.x < -0.5f)
+            {
+                isTouchingWallRight = true;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
+        isTouchingWallLeft = false;
+        isTouchingWallRight = false;
+    }
+
 }
