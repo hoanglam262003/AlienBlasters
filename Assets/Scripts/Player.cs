@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private int maxJumps = 1;
+    [SerializeField] private int maxJumps = 2;
 
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private AudioSource audioSource;
 
     private bool jumpRequested;
     private bool isGrounded;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         jumpsRemaining = maxJumps;
     }
 
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
             }
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpsRemaining--;
+            audioSource.Play();
         }
         jumpRequested = false;
     }
@@ -92,19 +95,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = false;
-        isTouchingWallLeft = false;
-        isTouchingWallRight = false;
-
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (contact.normal.y > 0.5f)
             {
                 isGrounded = true;
                 jumpsRemaining = maxJumps;
+                break;
             }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        isTouchingWallLeft = false;
+        isTouchingWallRight = false;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
             if (contact.normal.x > 0.5f)
             {
                 isTouchingWallLeft = true;
