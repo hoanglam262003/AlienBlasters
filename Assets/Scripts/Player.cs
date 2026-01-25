@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
             }
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpsRemaining--;
+            audioSource.pitch = jumpsRemaining > 0 ? 1f : 1.2f;
             audioSource.Play();
         }
         jumpRequested = false;
