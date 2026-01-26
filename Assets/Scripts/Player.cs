@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    private const string IS_MOVING = "IsMoving";
+    private const string IS_GROUNDED = "IsGrounded";
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private int maxJumps = 2;
@@ -59,7 +61,7 @@ public class Player : MonoBehaviour
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
         FlipSprite(moveX);
 
-        animator.SetBool("IsMoving", Mathf.Abs(moveX) > 0.01f);
+        animator.SetBool(IS_MOVING, Mathf.Abs(moveX) > 0.01f);
     }
 
     private void HandleJump()
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool(IS_GROUNDED, isGrounded);
     }
 
     private void FlipSprite(float moveX)
