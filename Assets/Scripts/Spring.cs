@@ -7,9 +7,11 @@ public class Spring : MonoBehaviour
     [SerializeField] private Sprite sprung;
     private SpriteRenderer spriteRenderer;
     private Coroutine resetCoroutine;
+    private AudioSource audioSource;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         defaultSprite = spriteRenderer.sprite;
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -17,6 +19,7 @@ public class Spring : MonoBehaviour
         if (collision.collider.GetComponent<Player>() != null)
         {
             spriteRenderer.sprite = sprung;
+            audioSource.Play();
         }
         if (resetCoroutine != null)
         {
