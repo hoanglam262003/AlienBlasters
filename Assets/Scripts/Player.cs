@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private LayerMask resetJumpLayers;
+    [SerializeField] private LayerMask groundLayers;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -100,6 +102,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        int otherLayer = collision.gameObject.layer;
+
+        if (((1 << otherLayer) & groundLayers) == 0)
+            return;
+
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (contact.normal.y > 0.5f)
@@ -131,9 +138,36 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isGrounded = false;
+        int otherLayer = collision.gameObject.layer;
+
+        if (((1 << otherLayer) & groundLayers) != 0)
+        {
+            isGrounded = false;
+        }
         isTouchingWallLeft = false;
         isTouchingWallRight = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        int otherLayer = other.gameObject.layer;
+
+        if (((1 << otherLayer) & resetJumpLayers) != 0)
+        {
+            jumpsRemaining = maxJumps;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        int otherLayer = other.gameObject.layer;
+
+        if (((1 << otherLayer) & resetJumpLayers) == 0)
+            return;
+
+        if (rb.linearVelocity.y <= 0f)
+        {
+            jumpsRemaining = maxJumps;
+        }
+    }
 }
