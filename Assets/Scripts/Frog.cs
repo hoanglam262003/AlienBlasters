@@ -15,12 +15,14 @@ public class Frog : Enemy
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
     private int jumpRemaining;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         defaultSprite = spriteRenderer.sprite;
         jumpRemaining = jumps;
 
@@ -43,6 +45,7 @@ public class Frog : Enemy
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         spriteRenderer.sprite = defaultSprite;
+        audioSource.Play();
         base.OnCollisionEnter2D(collision);
     }
 }
