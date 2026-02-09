@@ -2607,7 +2607,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4549633821648236067, guid: f2c75269678b77f4e8d61440cc7ee639, type: 3}
+  m_Sprite: {fileID: -4973259912239718972, guid: 2b3574074e39ecc4c9972ab9ed59cb8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2705,7 +2705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e068bd292f9364ea602aaf4637510f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadLevel
-  levelName: Level 2
+  levelName: Level 1
 --- !u!1001 &1112150581
 PrefabInstance:
   m_ObjectHideFlags: 0
