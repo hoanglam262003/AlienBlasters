@@ -13,6 +13,7 @@ public class Spikes : MonoBehaviour
 
     public void Die()
     {
-        SceneManager.LoadScene(0);
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 }
