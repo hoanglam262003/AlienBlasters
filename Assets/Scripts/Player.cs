@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
 {
     private const string IS_MOVING = "IsMoving";
     private const string IS_GROUNDED = "IsGrounded";
+    private const string IS_ON_SNOW = "Snow";
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private int maxJumps = 2;
+    [SerializeField] private float snowSpeedMultiplier = 0.5f;
 
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     private bool isTouchingWallLeft;
     private bool isTouchingWallRight;
+    private bool isOnSnow;
 
     private int jumpsRemaining;
 
@@ -60,7 +63,8 @@ public class Player : MonoBehaviour
         {
             moveX = 0f;
         }
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+        float currentSpeed = isOnSnow ? moveSpeed * snowSpeedMultiplier : moveSpeed;
+        rb.linearVelocity = new Vector2(moveX * currentSpeed, rb.linearVelocity.y);
         FlipSprite(moveX);
 
         animator.SetBool(IS_MOVING, Mathf.Abs(moveX) > 0.01f);
@@ -102,6 +106,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag(IS_ON_SNOW))
+        {
+            isOnSnow = true;
+        }
         int otherLayer = collision.gameObject.layer;
 
         if (((1 << otherLayer) & groundLayers) == 0)
@@ -138,6 +146,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag(IS_ON_SNOW))
+        {
+            isOnSnow = false;
+        }
         int otherLayer = collision.gameObject.layer;
 
         if (((1 << otherLayer) & groundLayers) != 0)
