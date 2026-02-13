@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        //Scene currentScene = SceneManager.GetActiveScene();
+        //SceneManager.LoadScene(currentScene.buildIndex);
+        SceneManager.LoadScene(0);
     }
 }
