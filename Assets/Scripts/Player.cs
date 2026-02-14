@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private bool isOnSnow;
 
     private int jumpsRemaining;
+    private int coinsCollected;
 
     private void Awake()
     {
@@ -181,5 +182,10 @@ public class Player : MonoBehaviour
         {
             jumpsRemaining = maxJumps;
         }
+    }
+
+    public void AddCoin()
+    {
+        coinsCollected++;
     }
 }
