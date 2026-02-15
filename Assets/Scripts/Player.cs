@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private LayerMask resetJumpLayers;
     [SerializeField] private LayerMask groundLayers;
+    [SerializeField] private AudioClip coinSfx;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -187,5 +188,6 @@ public class Player : MonoBehaviour
     public void AddCoin()
     {
         coinsCollected++;
+        audioSource.PlayOneShot(coinSfx);
     }
 }
