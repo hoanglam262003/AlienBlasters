@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,16 +8,27 @@ public class Player : MonoBehaviour
     private const string IS_MOVING = "IsMoving";
     private const string IS_GROUNDED = "IsGrounded";
     private const string IS_ON_SNOW = "Snow";
+
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private int maxJumps = 2;
     [SerializeField] private float snowSpeedMultiplier = 0.5f;
 
+    [Header("Sprite")]
     [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite defaultSprite;
+
+    [Header("Layers")]
     [SerializeField] private LayerMask resetJumpLayers;
     [SerializeField] private LayerMask groundLayers;
+
+    [Header("Audio")]
     [SerializeField] private AudioClip coinSfx;
+
+    public int PlayerId { get; private set; }
+    public int CoinsCollected { get; private set; }
+    public event Action<int> OnCoinsChanged;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -28,9 +40,7 @@ public class Player : MonoBehaviour
     private bool isTouchingWallLeft;
     private bool isTouchingWallRight;
     private bool isOnSnow;
-
     private int jumpsRemaining;
-    private int coinsCollected;
 
     private void Awake()
     {
@@ -39,6 +49,11 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         jumpsRemaining = maxJumps;
+    }
+
+    private void Start()
+    {
+        PlayerRegistry.Instance.Register(this);
     }
 
     private void Update()
@@ -54,6 +69,11 @@ public class Player : MonoBehaviour
         HandleMovement();
         HandleJump();
         UpdateAnimator();
+    }
+
+    public void Init(int playerId)
+    {
+        PlayerId = playerId;
     }
 
     private void HandleMovement()
@@ -187,7 +207,8 @@ public class Player : MonoBehaviour
 
     public void AddCoin()
     {
-        coinsCollected++;
+        CoinsCollected++;
         audioSource.PlayOneShot(coinSfx);
+        OnCoinsChanged?.Invoke(CoinsCollected);
     }
 }
