@@ -13,7 +13,6 @@ public class PlayerPanel : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogError("Player not found");
             return;
         }
 
