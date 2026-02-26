@@ -2075,6 +2075,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &701142067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701142068}
+  m_Layer: 0
+  m_Name: Lava
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701142068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701142067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -86.91959, y: -3.35015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1799287590}
+  - {fileID: 710631312}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701406124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,10 +2137,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1799287590}
   - {fileID: 1686954408}
   - {fileID: 394283695}
-  - {fileID: 710631312}
   - {fileID: 1884311264}
   - {fileID: 2030206278}
   m_Father: {fileID: 0}
@@ -2123,7 +2154,7 @@ GameObject:
   - component: {fileID: 710631312}
   - component: {fileID: 710631311}
   m_Layer: 4
-  m_Name: water
+  m_Name: lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2178,7 +2209,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 0cae931e3b6460d4994010536d453969, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d39872f6444468a4884f88a6ca5ce2f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2197,11 +2228,11 @@ Transform:
   m_GameObject: {fileID: 710631310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4954796, y: -9.01247, z: 0}
+  m_LocalPosition: {x: 51.924114, y: -7.66232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 701406125}
+  m_Father: {fileID: 701142068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822007420
 GameObject:
@@ -2727,7 +2758,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPanel
   score: {fileID: 991037417}
-  playerId: 0
 --- !u!1 &1111788672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,11 +3965,10 @@ GameObject:
   - component: {fileID: 1799287590}
   - component: {fileID: 1799287589}
   - component: {fileID: 1799287592}
-  - component: {fileID: 1799287591}
   - component: {fileID: 1799287593}
   - component: {fileID: 1799287594}
   m_Layer: 4
-  m_Name: waterTop_high
+  m_Name: lavaTop_high
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3994,7 +4023,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: b93f9bc048f273b4a99221e928b3776b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be99d3434a138de489fd06c716e35c9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4013,32 +4042,12 @@ Transform:
   m_GameObject: {fileID: 1799287588}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4954796, y: -2.51247, z: 0}
+  m_LocalPosition: {x: 51.924114, y: -1.1623201, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 701406125}
+  m_Father: {fileID: 701142068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!253 &1799287591
-BuoyancyEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799287588}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_SurfaceLevel: 0
-  m_Density: 2
-  m_LinearDamping: 5
-  m_AngularDamping: 5
-  m_FlowAngle: 0
-  m_FlowMagnitude: 0
-  m_FlowVariation: 0
 --- !u!60 &1799287592
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4069,7 +4078,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -4199,9 +4208,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799287588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b506370a97e700740aa23a2efcdbce97, type: 3}
+  m_Script: {fileID: 11500000, guid: 768c39ed60ff93e4caf12beaf7a13adb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Water
+  m_EditorClassIdentifier: Assembly-CSharp::Spikes
 --- !u!1001 &1876660794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4802,3 +4811,4 @@ SceneRoots:
   - {fileID: 61580709}
   - {fileID: 303912251}
   - {fileID: 1059931359}
+  - {fileID: 701142068}
