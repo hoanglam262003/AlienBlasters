@@ -5,16 +5,12 @@ public class Spikes : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetComponent<Player>() != null)
+        var player = collision.collider.GetComponent<Player>();
+        if (player != null)
         {
-            Die();
-        }
-    }
+            Vector2 hitDirection = (player.transform.position - transform.position).normalized;
 
-    public void Die()
-    {
-        //Scene currentScene = SceneManager.GetActiveScene();
-        //SceneManager.LoadScene(currentScene.buildIndex);
-        SceneManager.LoadScene(0);
+            player.GetHit(hitDirection);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class PlayerPanel : MonoBehaviour
         }
 
         player.OnCoinsChanged += UpdateScore;
-        UpdateScore(player.CoinsCollected);
+        UpdateScore(player.coinsCollected);
     }
 
     private void OnDestroy()
