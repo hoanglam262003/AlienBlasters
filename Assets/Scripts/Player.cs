@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -23,11 +25,16 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask resetJumpLayers;
     [SerializeField] private LayerMask groundLayers;
 
+    [Header("Combat")]
+    [SerializeField] private float invincibleTime = 1f;
+    [SerializeField] private float knockbackForce = 8f;
+
     [Header("Audio")]
     [SerializeField] private AudioClip coinSfx;
 
-    public int PlayerId { get; private set; }
-    public int CoinsCollected { get; private set; }
+    public int playerId { get; private set; }
+    public int coinsCollected { get; private set; }
+    public int health { get; private set; } = 3;
     public event Action<int> OnCoinsChanged;
 
     private Rigidbody2D rb;
@@ -40,6 +47,9 @@ public class Player : MonoBehaviour
     private bool isTouchingWallLeft;
     private bool isTouchingWallRight;
     private bool isOnSnow;
+    private bool isInvincible;
+    private bool isHurt;
+
     private int jumpsRemaining;
 
     private void Awake()
@@ -66,14 +76,17 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleJump();
+        if (!isHurt)
+        {
+            HandleMovement();
+            HandleJump();
+        }
         UpdateAnimator();
     }
 
     public void Init(int playerId)
     {
-        PlayerId = playerId;
+        this.playerId = playerId;
     }
 
     private void HandleMovement()
@@ -207,8 +220,57 @@ public class Player : MonoBehaviour
 
     public void AddCoin()
     {
-        CoinsCollected++;
+        coinsCollected++;
         audioSource.PlayOneShot(coinSfx);
-        OnCoinsChanged?.Invoke(CoinsCollected);
+        OnCoinsChanged?.Invoke(coinsCollected);
+    }
+
+    public void GetHit(Vector2 hitDirection)
+    {
+        if (isInvincible)
+            return;
+
+        health--;
+
+        if (health < 0)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+
+        isInvincible = true;
+        isHurt = true;
+
+        rb.linearVelocity = Vector2.zero;
+        Vector2 knockbackDir = new Vector2(Mathf.Sign(hitDirection.x), 1f).normalized;
+
+        rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+
+        StartCoroutine(HurtCoroutine());
+    }
+
+    private IEnumerator HurtCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        isHurt = false;
+
+        StartCoroutine(InvincibleCoroutine());
+    }
+
+    private IEnumerator InvincibleCoroutine()
+    {
+        isInvincible = true;
+
+        float timer = 0f;
+        while (timer < invincibleTime)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
+        }
+
+        spriteRenderer.enabled = true;
+        isInvincible = false;
     }
 }
