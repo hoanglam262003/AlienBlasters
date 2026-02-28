@@ -1102,6 +1102,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3300351527535146952, guid: 9991db7df8e4a7445bf00c87986dcf9e, type: 3}
+      propertyPath: invincibleTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3750216059601365737, guid: 9991db7df8e4a7445bf00c87986dcf9e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4208,9 +4212,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799287588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 768c39ed60ff93e4caf12beaf7a13adb, type: 3}
+  m_Script: {fileID: 11500000, guid: d49e729c883756e4997bce3b34cc4d3c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spikes
+  m_EditorClassIdentifier: Assembly-CSharp::Lava
+  damageInterval: 1
 --- !u!1001 &1876660794
 PrefabInstance:
   m_ObjectHideFlags: 0
