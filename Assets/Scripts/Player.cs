@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayers;
 
     [Header("Combat")]
-    [SerializeField] private float invincibleTime = 1f;
+    [SerializeField] private float invincibleTime = 0.5f;
     [SerializeField] private float knockbackForce = 8f;
 
     [Header("Audio")]
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
-    public int health { get; private set; } = 3;
+    public int health { get; private set; } = 10;
     public event Action<int> OnCoinsChanged;
 
     private Rigidbody2D rb;
