@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip coinSfx;
+    [SerializeField] private AudioClip hurtSfx;
 
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
@@ -232,7 +233,7 @@ public class Player : MonoBehaviour
 
         health--;
 
-        if (health < 0)
+        if (health <= 0)
         {
             SceneManager.LoadScene(0);
             return;
@@ -245,6 +246,7 @@ public class Player : MonoBehaviour
         Vector2 knockbackDir = new Vector2(Mathf.Sign(hitDirection.x), 1f).normalized;
 
         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+        audioSource.PlayOneShot(hurtSfx);
 
         StartCoroutine(HurtCoroutine());
     }
