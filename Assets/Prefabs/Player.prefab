@@ -195,7 +195,10 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
+  invincibleTime: 0.5
+  knockbackForce: 8
   coinSfx: {fileID: 8300000, guid: a726261a7d1f63a4d862318f0faf7f51, type: 3}
+  hurtSfx: {fileID: 8300000, guid: 861b2df36cc024745bad3e9088d91233, type: 3}
 --- !u!95 &445373914711136864
 Animator:
   serializedVersion: 7
