@@ -6,6 +6,13 @@ public class PlayerRegistry : MonoBehaviour
 
     private Player currentPlayer;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        GameObject obj = new GameObject("PlayerRegistry");
+        obj.AddComponent<PlayerRegistry>();
+    }
+
     private void Awake()
     {
         if (Instance != null)
