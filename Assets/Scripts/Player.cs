@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public int coinsCollected { get; private set; }
     public int health { get; private set; } = 10;
     public event Action<int> OnCoinsChanged;
+    public event Action<int> OnHealthChanged;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -60,11 +61,14 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         jumpsRemaining = maxJumps;
-    }
-
-    private void Start()
-    {
-        PlayerRegistry.Instance.Register(this);
+        if (PlayerRegistry.Instance != null)
+        {
+            PlayerRegistry.Instance.Register(this);
+        }
+        else
+        {
+            Debug.LogError("PlayerRegistry not found!");
+        }
     }
 
     private void Update()
@@ -232,10 +236,12 @@ public class Player : MonoBehaviour
             return;
 
         health--;
+        OnHealthChanged?.Invoke(health);
 
         if (health <= 0)
         {
             SceneManager.LoadScene(0);
+            PlayerRegistry.Instance.Clear();
             return;
         }
 
