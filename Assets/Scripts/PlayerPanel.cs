@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,7 +10,9 @@ public class PlayerPanel : MonoBehaviour
     [SerializeField]
     private TMP_Text score;
     [SerializeField]
-    private Image[] hearts; 
+    private Image[] hearts;
+    [SerializeField]
+    private Image flashImage;
 
     private Player player;
     private void Start()
@@ -71,5 +75,13 @@ public class PlayerPanel : MonoBehaviour
         {
             hearts[i].enabled = i < health;
         }
+        StartCoroutine(Flash());
+    }
+
+    private IEnumerator Flash()
+    {
+        flashImage.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        flashImage.enabled = false;
     }
 }
