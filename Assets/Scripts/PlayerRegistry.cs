@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerRegistry : MonoBehaviour
@@ -38,5 +39,9 @@ public class PlayerRegistry : MonoBehaviour
     public void Clear()
     {
         currentPlayer = null;
+    }
+
+    public void NewGame()
+    {
     }
 }
