@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRegistry : MonoBehaviour
 {
@@ -43,5 +44,6 @@ public class PlayerRegistry : MonoBehaviour
 
     public void NewGame()
     {
+        SceneManager.LoadScene("Level 1");
     }
 }

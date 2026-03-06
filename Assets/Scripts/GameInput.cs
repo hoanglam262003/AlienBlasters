@@ -120,4 +120,9 @@ public class GameInput : MonoBehaviour
             currentRebind = null;
         }
     }
+
+    public bool IsPausePressed()
+    {
+        return playerInputActions.Player.Pause.triggered;
+    }
 }
