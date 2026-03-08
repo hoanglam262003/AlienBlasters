@@ -1,13 +1,25 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseGameUI : MonoBehaviour
 {
     [SerializeField] private GameObject pauseGameUI;
+    [SerializeField] private SettingsUI settingsUI;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button resumeButton;
 
     private bool isPaused;
 
+    private void Awake()
+    {
+        settingsButton.onClick.AddListener(OpenSettings);
+        resumeButton.onClick.AddListener(ResumeGame);
+    }
+
     private void Update()
     {
+        if (settingsUI.gameObject.activeSelf)
+            return;
         if (GameInput.Instance.IsPausePressed())
         {
             TogglePause();
@@ -34,5 +46,16 @@ public class PauseGameUI : MonoBehaviour
         Time.timeScale = 1f;
         pauseGameUI.SetActive(false);
         isPaused = false;
+    }
+
+    public void OpenSettings()
+    {
+        pauseGameUI.SetActive(false);
+        settingsUI.Show();
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseGameUI.SetActive(true);
     }
 }
