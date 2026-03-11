@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private int maxJumps = 2;
     [SerializeField] private float snowSpeedMultiplier = 0.5f;
+    [SerializeField] private float movingPlatformSpeedMultiplier = 2f;
 
     [Header("Sprite")]
     [SerializeField] private Sprite jumpSprite;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
     private bool isOnSnow;
     private bool isInvincible;
     private bool isHurt;
+    private bool isOnMovingPlatform;
 
     private int jumpsRemaining;
 
@@ -103,7 +105,17 @@ public class Player : MonoBehaviour
         {
             moveX = 0f;
         }
-        float currentSpeed = isOnSnow ? moveSpeed * snowSpeedMultiplier : moveSpeed;
+        float currentSpeed = moveSpeed;
+
+        if (isOnSnow)
+        {
+            currentSpeed *= snowSpeedMultiplier;
+        }
+
+        if (isOnMovingPlatform)
+        {
+            currentSpeed *= movingPlatformSpeedMultiplier;
+        }
         rb.linearVelocity = new Vector2(moveX * currentSpeed, rb.linearVelocity.y);
         FlipSprite(moveX);
 
@@ -168,11 +180,21 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        int otherLayer = collision.gameObject.layer;
+
+        if (((1 << otherLayer) & groundLayers) == 0)
+            return;
+
+        isGrounded = false;
         isTouchingWallLeft = false;
         isTouchingWallRight = false;
 
         foreach (ContactPoint2D contact in collision.contacts)
         {
+            if (contact.normal.y > 0.5f)
+            {
+                isGrounded = true;
+            }
             if (contact.normal.x > 0.5f)
             {
                 isTouchingWallLeft = true;
@@ -280,5 +302,10 @@ public class Player : MonoBehaviour
 
         spriteRenderer.enabled = true;
         isInvincible = false;
+    }
+
+    public void SetOnMovingPlatform(bool value)
+    {
+        isOnMovingPlatform = value;
     }
 }
