@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem brickBreakParticle;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<Player>();
@@ -13,6 +14,7 @@ public class Brick : MonoBehaviour
         float dot = Vector2.Dot(normal, Vector2.up);
         if (dot > 0.5f)
         {
+            Instantiate(brickBreakParticle, transform.localPosition, Quaternion.identity);
             Destroy(gameObject);
         }
     }

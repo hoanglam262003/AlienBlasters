@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c80d363fcfe2be4f8a632766783c271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Brick
+  brickBreakParticle: {fileID: 55264836284251069, guid: ec85b06893a3b4f44aab14164a4dd7fe, type: 3}
