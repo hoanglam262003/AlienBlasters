@@ -14,6 +14,7 @@ public class Brick : MonoBehaviour
         float dot = Vector2.Dot(normal, Vector2.up);
         if (dot > 0.5f)
         {
+            player.CancelJump();
             Instantiate(brickBreakParticle, transform.localPosition, Quaternion.identity);
             Destroy(gameObject);
         }

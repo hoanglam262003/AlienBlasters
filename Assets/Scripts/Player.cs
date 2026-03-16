@@ -308,4 +308,12 @@ public class Player : MonoBehaviour
     {
         isOnMovingPlatform = value;
     }
+
+    public void CancelJump()
+    {
+        if (rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -1f);
+        }
+    }
 }
