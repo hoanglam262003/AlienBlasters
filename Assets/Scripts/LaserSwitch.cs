@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LaserSwitch : MonoBehaviour
 {
     [SerializeField] private Sprite leftSprite;
     [SerializeField] private Sprite rightSprite;
+    [SerializeField] private UnityEvent on;
+    [SerializeField] private UnityEvent off;
 
     private SpriteRenderer spriteRenderer;
 
@@ -32,10 +35,12 @@ public class LaserSwitch : MonoBehaviour
     private void TurnOn()
     {
         spriteRenderer.sprite = rightSprite;
+        on.Invoke();
     }
 
     private void TurnOff()
     {
         spriteRenderer.sprite = leftSprite;
+        off.Invoke();
     }
 }
