@@ -16,38 +16,26 @@ public class LaserSwitch : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
         if (player == null)
             return;
 
-        var rb = player.GetComponent<Rigidbody2D>();
-        if (rb.linearVelocity.x > 0)
-        {
-            TurnOn();
-        }
-        else if (rb.linearVelocity.x < 0)
-        {
-            TurnOff();
-        }
+        Toggle();
     }
 
-    private void TurnOn()
+    private void Toggle()
     {
-        if (isOn == false)
+        isOn = !isOn;
+
+        if (isOn)
         {
-            isOn = true;
             on.Invoke();
             spriteRenderer.sprite = rightSprite;
         }
-    }
-
-    private void TurnOff()
-    {
-        if (isOn)
+        else
         {
-            isOn = false;
             off.Invoke();
             spriteRenderer.sprite = leftSprite;
         }
