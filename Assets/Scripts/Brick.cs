@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
     [SerializeField] private ParticleSystem brickBreakParticle;
+    [SerializeField] float laserDestroyTime = 1f;
+
+    float takeDamageTime;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<Player>();
@@ -15,8 +20,22 @@ public class Brick : MonoBehaviour
         if (dot > 0.5f)
         {
             player.CancelJump();
-            Instantiate(brickBreakParticle, transform.localPosition, Quaternion.identity);
-            Destroy(gameObject);
+            Explode();
         }
+    }
+
+    public void TakeLaserDamage()
+    {
+        takeDamageTime += Time.deltaTime;
+        if (takeDamageTime >= laserDestroyTime)
+        {
+            Explode();
+        }
+    }
+
+    private void Explode()
+    {
+        Instantiate(brickBreakParticle, transform.localPosition, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
