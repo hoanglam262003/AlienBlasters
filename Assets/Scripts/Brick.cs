@@ -4,10 +4,16 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private ParticleSystem brickBreakParticle;
-    [SerializeField] float laserDestroyTime = 1f;
+    [SerializeField] private float laserDestroyTime = 1f;
 
-    float takeDamageTime;
+    private SpriteRenderer spriteRenderer;
+    private float takeDamageTime;
+    private float originalColorTime;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var player = collision.gameObject.GetComponent<Player>();
@@ -26,10 +32,21 @@ public class Brick : MonoBehaviour
 
     public void TakeLaserDamage()
     {
+        spriteRenderer.color = Color.red;
+        originalColorTime = Time.time + 0.1f;
         takeDamageTime += Time.deltaTime;
         if (takeDamageTime >= laserDestroyTime)
         {
             Explode();
+        }
+    }
+
+    private void Update()
+    {
+        if (originalColorTime > 0 && originalColorTime <= Time.time)
+        {
+            originalColorTime = 0;
+            spriteRenderer.color = Color.white;
         }
     }
 
