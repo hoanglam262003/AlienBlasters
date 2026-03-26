@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class LadyBug : Enemy
+public class LadyBug : Enemy, ITakeLaserDamage
 {
     [SerializeField]
     private float speed = 1f;
@@ -63,5 +64,10 @@ public class LadyBug : Enemy
         {
             return new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
         }
+    }
+
+    public void TakeLaserDamage()
+    {
+        rb.linearVelocity = Vector2.zero;
     }
 }
