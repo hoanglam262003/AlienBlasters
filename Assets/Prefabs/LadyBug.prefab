@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3650909295299946961}
   - component: {fileID: 7196951220685389594}
   - component: {fileID: 7574046877268725650}
+  - component: {fileID: 7582515743978583563}
   m_Layer: 0
   m_Name: LadyBug
   m_TagString: Untagged
@@ -194,3 +195,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LadyBug
   speed: 1
+  raycastDistance: 0.2
+  forwardRaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 63
+--- !u!114 &7582515743978583563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000751005264541487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768c39ed60ff93e4caf12beaf7a13adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spikes
