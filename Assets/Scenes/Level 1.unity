@@ -7089,11 +7089,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7582515743978583563, guid: 36e816cfda8943d4e81cba81ada4da90, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000751005264541487, guid: 36e816cfda8943d4e81cba81ada4da90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8309929409374754668}
   m_SourcePrefab: {fileID: 100100000, guid: 36e816cfda8943d4e81cba81ada4da90, type: 3}
+--- !u!1 &8309929409374754667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000751005264541487, guid: 36e816cfda8943d4e81cba81ada4da90, type: 3}
+  m_PrefabInstance: {fileID: 8309929409374754666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8309929409374754668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309929409374754667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe044516dbccc14ca25a7db6b1d31fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

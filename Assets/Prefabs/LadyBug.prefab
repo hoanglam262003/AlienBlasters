@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3650909295299946961}
   - component: {fileID: 7196951220685389594}
   - component: {fileID: 7574046877268725650}
-  - component: {fileID: 7582515743978583563}
+  - component: {fileID: 4885901068467808195}
   m_Layer: 0
   m_Name: LadyBug
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000751005264541487}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -80.5, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   forwardRaycastLayerMask:
     serializedVersion: 2
     m_Bits: 63
---- !u!114 &7582515743978583563
+--- !u!114 &4885901068467808195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,6 +208,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000751005264541487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 768c39ed60ff93e4caf12beaf7a13adb, type: 3}
+  m_Script: {fileID: 11500000, guid: efe044516dbccc14ca25a7db6b1d31fa, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spikes
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
