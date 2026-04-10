@@ -316,4 +316,9 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -1f);
         }
     }
+
+    public void Bounce(Vector2 normal, float bounceForce)
+    {
+        rb.AddForce(-normal * bounceForce);
+    }
 }
