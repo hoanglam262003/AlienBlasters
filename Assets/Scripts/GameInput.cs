@@ -14,6 +14,7 @@ public class GameInput : MonoBehaviour
         Move_Left,
         Move_Right,
         Jump,
+        Shoot,
     }
 
     private PlayerInputActions playerInputActions;
@@ -62,6 +63,8 @@ public class GameInput : MonoBehaviour
                 return playerInputActions.Player.Move.bindings[2].ToDisplayString();
             case Binding.Jump:
                 return playerInputActions.Player.Jump.bindings[0].ToDisplayString();
+            case Binding.Shoot:
+                return playerInputActions.Player.Shoot.bindings[0].ToDisplayString();
         }
     }
 
@@ -86,6 +89,10 @@ public class GameInput : MonoBehaviour
                 break;
             case Binding.Jump:
                 action = playerInputActions.Player.Jump;
+                bindingIndex = 0;
+                break;
+            case Binding.Shoot:
+                action = playerInputActions.Player.Shoot;
                 bindingIndex = 0;
                 break;
         }
@@ -124,5 +131,10 @@ public class GameInput : MonoBehaviour
     public bool IsPausePressed()
     {
         return playerInputActions.Player.Pause.triggered;
+    }
+
+    public bool IsShootPressed()
+    {
+        return playerInputActions.Player.Shoot.triggered;
     }
 }
