@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayers;
 
     [Header("Combat")]
+    [SerializeField] private Blaster blaster;
     [SerializeField] private float invincibleTime = 0.5f;
     [SerializeField] private float knockbackForce = 8f;
 
@@ -78,6 +79,10 @@ public class Player : MonoBehaviour
         if (GameInput.Instance.IsJumpPressed())
         {
             jumpRequested = true;
+        }
+        if (GameInput.Instance.IsShootPressed())
+        {
+            blaster.TryShoot();
         }
     }
 
@@ -148,11 +153,11 @@ public class Player : MonoBehaviour
     {
         if (moveX < 0f)
         {
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else if (moveX > 0f)
         {
-            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
