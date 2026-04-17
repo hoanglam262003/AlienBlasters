@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3650909295299946961}
   - component: {fileID: 7196951220685389594}
   - component: {fileID: 7574046877268725650}
-  - component: {fileID: 4885901068467808195}
   - component: {fileID: 4475645860262722573}
   m_Layer: 0
   m_Name: LadyBug
@@ -200,18 +199,6 @@ MonoBehaviour:
   forwardRaycastLayerMask:
     serializedVersion: 2
     m_Bits: 63
---- !u!114 &4885901068467808195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000751005264541487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe044516dbccc14ca25a7db6b1d31fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!114 &4475645860262722573
 MonoBehaviour:
   m_ObjectHideFlags: 0
