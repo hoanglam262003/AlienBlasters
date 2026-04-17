@@ -14,8 +14,10 @@ public class LadyBug : Enemy, ITakeLaserDamage
     private Collider2D col;
     private Rigidbody2D rb;
 
-    private void Awake()
+    protected override void Awake()
     {
+        maxHP = 2;
+        base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();

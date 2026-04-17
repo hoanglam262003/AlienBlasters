@@ -18,8 +18,10 @@ public class Frog : Enemy
     private AudioSource audioSource;
     private int jumpRemaining;
 
-    private void Awake()
+    protected override void Awake()
     {
+        maxHP = 3;
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
@@ -45,7 +47,10 @@ public class Frog : Enemy
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         spriteRenderer.sprite = defaultSprite;
-        audioSource.Play();
+        if (audioSource != null && audioSource.enabled && audioSource.gameObject.activeInHierarchy)
+        {
+            audioSource.Play();
+        }
         base.OnCollisionEnter2D(collision);
     }
 }
