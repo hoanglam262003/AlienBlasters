@@ -55,4 +55,9 @@ public class Brick : MonoBehaviour, ITakeLaserDamage
         Instantiate(brickBreakParticle, transform.localPosition, Quaternion.identity);
         Destroy(gameObject);
     }
+
+    public void TakeBulletDamage()
+    {
+        Explode();
+    }
 }
