@@ -13,12 +13,18 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var enemy = collision.collider.GetComponent<Enemy>();
-
+        var enemy = collision.collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
         }
+
+        var brick = collision.collider.GetComponent<Brick>();
+        if (brick != null)
+        {
+            brick.TakeBulletDamage();
+        }
+
         Destroy(gameObject);
     }
 }
