@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] 
     private int damage = 1;
+    [SerializeField]
+    private ParticleSystem impactEffect;
 
     private Rigidbody2D rb;
 
@@ -13,6 +15,11 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        ContactPoint2D contact = collision.GetContact(0);
+        if (impactEffect != null)
+        {
+            Instantiate(impactEffect, contact.point, Quaternion.identity);
+        }
         var enemy = collision.collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {

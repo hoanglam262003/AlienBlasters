@@ -179,3 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697c2fe443af6054bb7681bcfb403d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  damage: 1
+  impactEffect: {fileID: 55264836284251069, guid: 8fe30ab039f40c64f90f8cb48792d7bd, type: 3}
