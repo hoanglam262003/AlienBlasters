@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   damage: 1
   impactEffect: {fileID: 55264836284251069, guid: 8fe30ab039f40c64f90f8cb48792d7bd, type: 3}
+  lifeTime: 3
