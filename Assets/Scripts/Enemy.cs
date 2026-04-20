@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected int maxHP = 1;
 
+    public virtual bool UseDamageReceiver => false;
     protected int currentHP;
     private bool ignoreFromTop = true;
 

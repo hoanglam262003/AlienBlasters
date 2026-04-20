@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private int damage = 1;
     [SerializeField]
     private ParticleSystem impactEffect;
@@ -33,7 +33,18 @@ public class Bullet : MonoBehaviour
         {
             damageReceiver.owner.TakeDamage(damage);
         }
-
+        else
+        {
+            var enemy = collision.collider.GetComponentInParent<Enemy>();
+            if (enemy != null)
+            {
+                if (enemy.UseDamageReceiver) { }
+                else
+                {
+                    enemy.TakeDamage(damage);
+                }
+            }
+        }
         var brick = collision.collider.GetComponent<Brick>();
         if (brick != null)
         {
