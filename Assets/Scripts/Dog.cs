@@ -7,6 +7,8 @@ public class Dog : Enemy
     [SerializeField] private Vector2 standOffset;
     [SerializeField] private Vector2 crouchSize;
     [SerializeField] private Vector2 crouchOffset;
+
+    public override bool UseDamageReceiver => true;
     protected override void Awake()
     {
         maxHP = 10;
