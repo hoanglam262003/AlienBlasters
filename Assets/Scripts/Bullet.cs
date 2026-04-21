@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
@@ -9,16 +11,27 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float lifeTime = 3f;
 
+    private ObjectPool<Bullet> pool;
     private Rigidbody2D rb;
+    private bool isReleased = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        Destroy(gameObject, lifeTime);
+        isReleased = false;
+        Invoke(nameof(DestroyBullet), lifeTime);
+    }
+
+    private void DestroyBullet()
+    {
+        if (isReleased) return;
+        isReleased = true;
+        CancelInvoke();
+        pool.Release(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,6 +64,11 @@ public class Bullet : MonoBehaviour
             brick.TakeBulletDamage();
         }
 
-        Destroy(gameObject);
+        DestroyBullet();
+    }
+
+    public void SetPool(ObjectPool<Bullet> pool)
+    {
+        this.pool = pool;
     }
 }
