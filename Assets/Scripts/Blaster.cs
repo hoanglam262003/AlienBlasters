@@ -4,27 +4,10 @@ using UnityEngine.Pool;
 
 public class Blaster : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireRate = 0.2f;
-
-    private ObjectPool<Bullet> pool;
+    
     private float lastShootTime;
-
-    private void Awake()
-    {
-        pool = new ObjectPool<Bullet>(AddBulletToPool,
-            t => t.gameObject.SetActive(true),
-            t => t.gameObject.SetActive(false)
-            );
-    }
-
-    private Bullet AddBulletToPool()
-    {
-        var shot = Instantiate(bulletPrefab).GetComponent<Bullet>();
-        shot.SetPool(pool);
-        return shot;
-    }
 
     public void TryShoot()
     {
@@ -39,7 +22,7 @@ public class Blaster : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bullet = pool.Get().gameObject;
+        Bullet bullet = PoolManager.Instance.GetBullet();
         bullet.transform.position = firePoint.position;
 
         float direction = transform.root.localScale.x > 0 ? 1f : -1f;
