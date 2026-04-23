@@ -15,6 +15,7 @@ public class GameInput : MonoBehaviour
         Move_Right,
         Jump,
         Shoot,
+        Duck,
     }
 
     private PlayerInputActions playerInputActions;
@@ -51,6 +52,11 @@ public class GameInput : MonoBehaviour
         return playerInputActions.Player.Jump.triggered;
     }
 
+    public bool IsDuckPressed()
+    {
+        return playerInputActions.Player.Duck.IsPressed();
+    }
+
     // ================= REBIND =================
     public string GetBindingText(Binding binding)
     {
@@ -65,6 +71,8 @@ public class GameInput : MonoBehaviour
                 return playerInputActions.Player.Jump.bindings[0].ToDisplayString();
             case Binding.Shoot:
                 return playerInputActions.Player.Shoot.bindings[0].ToDisplayString();
+            case Binding.Duck:
+                return playerInputActions.Player.Duck.bindings[0].ToDisplayString();
         }
     }
 
@@ -93,6 +101,10 @@ public class GameInput : MonoBehaviour
                 break;
             case Binding.Shoot:
                 action = playerInputActions.Player.Shoot;
+                bindingIndex = 0;
+                break;
+            case Binding.Duck:
+                action = playerInputActions.Player.Duck;
                 bindingIndex = 0;
                 break;
         }

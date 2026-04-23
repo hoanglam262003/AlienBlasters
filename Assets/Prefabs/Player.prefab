@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f7f20d56436804680c0c8a05790a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blaster
-  bulletPrefab: {fileID: 721926784971576176, guid: 5a48a344438bc00438fc6b19cd3bbc14, type: 3}
   firePoint: {fileID: 4307311157503619885}
   fireRate: 0.2
 --- !u!1 &2542275679126973078
@@ -281,6 +280,9 @@ MonoBehaviour:
   knockbackForce: 8
   coinSfx: {fileID: 8300000, guid: a726261a7d1f63a4d862318f0faf7f51, type: 3}
   hurtSfx: {fileID: 8300000, guid: 861b2df36cc024745bad3e9088d91233, type: 3}
+  boxCollider: {fileID: 707036713438274630}
+  duckSize: {x: 0.8359375, y: 1}
+  duckOffset: {x: 0, y: -0.2}
 --- !u!95 &445373914711136864
 Animator:
   serializedVersion: 7
