@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private const string IS_MOVING = "IsMoving";
     private const string IS_GROUNDED = "IsGrounded";
     private const string IS_ON_SNOW = "Snow";
+    private const string IS_DUCKING = "IsDucking";
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
@@ -35,6 +36,13 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip coinSfx;
     [SerializeField] private AudioClip hurtSfx;
 
+    [Header("Physics")]
+    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private Vector2 duckSize;
+    [SerializeField] private Vector2 duckOffset;
+    private Vector2 originalSize;
+    private Vector2 originalOffset;
+
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
     public int health { get; private set; } = 10;
@@ -54,6 +62,7 @@ public class Player : MonoBehaviour
     private bool isInvincible;
     private bool isHurt;
     private bool isOnMovingPlatform;
+    private bool isDucking;
 
     private int jumpsRemaining;
 
@@ -63,6 +72,9 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        originalSize = boxCollider.size;
+        originalOffset = boxCollider.offset;
         jumpsRemaining = maxJumps;
         if (PlayerRegistry.Instance != null)
         {
@@ -84,6 +96,17 @@ public class Player : MonoBehaviour
         {
             blaster.TryShoot();
         }
+        isDucking = GameInput.Instance.IsDuckPressed() && isGrounded;
+        if (isDucking)
+        {
+            boxCollider.size = duckSize;
+            boxCollider.offset = duckOffset;
+        }
+        else
+        {
+            boxCollider.size = originalSize;
+            boxCollider.offset = originalOffset;
+        }
     }
 
     private void FixedUpdate()
@@ -104,7 +127,10 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         float moveX = GameInput.Instance.GetMoveHorizontal();
-
+        if (isDucking)
+        {
+            moveX = 0f;
+        }
         if ((moveX < 0f && isTouchingWallLeft) ||
         (moveX > 0f && isTouchingWallRight))
         {
@@ -129,6 +155,11 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
+        if (isDucking)
+        {
+            jumpRequested = false;
+            return;
+        }
         if (jumpRequested && jumpsRemaining > 0)
         {
             if (isTouchingWallLeft || isTouchingWallRight)
@@ -147,6 +178,7 @@ public class Player : MonoBehaviour
     private void UpdateAnimator()
     {
         animator.SetBool(IS_GROUNDED, isGrounded);
+        animator.SetBool(IS_DUCKING, isDucking);
     }
 
     private void FlipSprite(float moveX)
