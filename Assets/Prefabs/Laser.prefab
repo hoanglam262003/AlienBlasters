@@ -145,7 +145,7 @@ LineRenderer:
   m_MaskInteraction: 0
   m_Positions:
   - {x: -86.5, y: 1, z: 0}
-  - {x: -78.5, y: 1, z: 0}
+  - {x: -85, y: 1, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -219,6 +219,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   distance: 10
   laserBurst: {fileID: 1734763684341002297}
+  lineRenderer: {fileID: 6703026141771202557}
 --- !u!1 &2415360366511686830
 GameObject:
   m_ObjectHideFlags: 0
