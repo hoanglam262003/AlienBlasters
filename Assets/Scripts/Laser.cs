@@ -8,13 +8,28 @@ public class Laser : MonoBehaviour
     private float distance = 10f;
     [SerializeField]
     private SpriteRenderer laserBurst;
+    [SerializeField]
     private LineRenderer lineRenderer;
+
     private bool isOn;
 
     private void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
         SetLaserState(false);
+    }
+
+    private void OnValidate()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.SetPosition(0, transform.position);
+        var endPoint = (Vector2)transform.position + direction.normalized * distance;
+        var hit = Physics2D.Raycast(transform.position, direction, distance);
+        if (hit.collider)
+        {
+            endPoint = hit.point;
+        }
+        lineRenderer.SetPosition(1, endPoint);
+        laserBurst.transform.position = endPoint;
     }
 
     private void Update()
