@@ -1,4 +1,7 @@
-﻿public interface ITakeLaserDamage
+﻿namespace Assets.Scripts.Interfaces
 {
-    void TakeLaserDamage();
+    public interface ITakeLaserDamage
+    {
+        void TakeLaserDamage();
+    }
 }

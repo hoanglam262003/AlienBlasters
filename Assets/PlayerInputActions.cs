@@ -136,6 +136,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""a473322b-4124-419c-a906-5ae0b98bb55f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -215,6 +224,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Duck"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae266b97-8ea1-4d73-907f-26d82e94aec5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Duck = m_Player.FindAction("Duck", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -313,6 +334,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Duck;
+    private readonly InputAction m_Player_Use;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -344,6 +366,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Duck".
         /// </summary>
         public InputAction @Duck => m_Wrapper.m_Player_Duck;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Use".
+        /// </summary>
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -385,6 +411,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Duck.started += instance.OnDuck;
             @Duck.performed += instance.OnDuck;
             @Duck.canceled += instance.OnDuck;
+            @Use.started += instance.OnUse;
+            @Use.performed += instance.OnUse;
+            @Use.canceled += instance.OnUse;
         }
 
         /// <summary>
@@ -411,6 +440,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Duck.started -= instance.OnDuck;
             @Duck.performed -= instance.OnDuck;
             @Duck.canceled -= instance.OnDuck;
+            @Use.started -= instance.OnUse;
+            @Use.performed -= instance.OnUse;
+            @Use.canceled -= instance.OnUse;
         }
 
         /// <summary>
@@ -486,5 +518,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDuck(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Use" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUse(InputAction.CallbackContext context);
     }
 }

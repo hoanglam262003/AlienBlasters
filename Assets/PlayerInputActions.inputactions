@@ -50,6 +50,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "a473322b-4124-419c-a906-5ae0b98bb55f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -127,6 +136,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Duck",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae266b97-8ea1-4d73-907f-26d82e94aec5",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
