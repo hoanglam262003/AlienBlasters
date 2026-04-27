@@ -1,3 +1,4 @@
+using Assets.Scripts.Interfaces;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -43,6 +44,10 @@ public class Player : MonoBehaviour
     private Vector2 originalSize;
     private Vector2 originalOffset;
 
+    [Header("Interact")]
+    private float interactRange = 1f;
+    private GameObject currentKey;
+
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
     public int health { get; private set; } = 10;
@@ -63,6 +68,7 @@ public class Player : MonoBehaviour
     private bool isHurt;
     private bool isOnMovingPlatform;
     private bool isDucking;
+    private bool hasKey;
 
     private int jumpsRemaining;
 
@@ -95,6 +101,10 @@ public class Player : MonoBehaviour
         if (GameInput.Instance.IsShootPressed())
         {
             blaster.TryShoot();
+        }
+        if (GameInput.Instance.IsUsePressed())
+        {
+            HandleUse();
         }
         isDucking = GameInput.Instance.IsDuckPressed() && isGrounded;
         if (isDucking)
@@ -173,6 +183,35 @@ public class Player : MonoBehaviour
             audioSource.Play();
         }
         jumpRequested = false;
+    }
+
+    private void HandleUse()
+    {
+        if (!GameInput.Instance.IsUsePressed()) return;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRange);
+
+        IInteractable closest = null;
+        float minDist = float.MaxValue;
+
+        foreach (var hit in hits)
+        {
+            var interactable = hit.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                float dist = Vector2.Distance(transform.position, hit.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = interactable;
+                }
+            }
+        }
+
+        if (closest != null)
+        {
+            closest.Interact(this);
+        }
     }
 
     private void UpdateAnimator()
@@ -357,5 +396,31 @@ public class Player : MonoBehaviour
     public void Bounce(Vector2 normal, float bounceForce)
     {
         rb.AddForce(-normal * bounceForce);
+    }
+
+    public void SetHasKey(bool value)
+    {
+        hasKey = value;
+    }
+
+    public bool HasKey()
+    {
+        return hasKey;
+    }
+
+    public void AttachKey (GameObject key)
+    {
+        currentKey = key;
+    }
+
+    public void ConsumeKey()
+    {
+        if (currentKey != null)
+        {
+            Destroy(currentKey);
+            currentKey = null;
+        }
+
+        hasKey = false;
     }
 }
