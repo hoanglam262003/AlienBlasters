@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
 
     [Header("Interact")]
     private float interactRange = 1f;
-    private GameObject currentKey;
 
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
@@ -58,6 +57,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private AudioSource audioSource;
+    private PlayerInventory inventory;
 
     private bool jumpRequested;
     private bool isGrounded;
@@ -68,7 +68,6 @@ public class Player : MonoBehaviour
     private bool isHurt;
     private bool isOnMovingPlatform;
     private bool isDucking;
-    private bool hasKey;
 
     private int jumpsRemaining;
 
@@ -79,6 +78,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        inventory = GetComponent<PlayerInventory>();
         originalSize = boxCollider.size;
         originalOffset = boxCollider.offset;
         jumpsRemaining = maxJumps;
@@ -398,29 +398,8 @@ public class Player : MonoBehaviour
         rb.AddForce(-normal * bounceForce);
     }
 
-    public void SetHasKey(bool value)
+    public PlayerInventory GetInventory()
     {
-        hasKey = value;
-    }
-
-    public bool HasKey()
-    {
-        return hasKey;
-    }
-
-    public void AttachKey (GameObject key)
-    {
-        currentKey = key;
-    }
-
-    public void ConsumeKey()
-    {
-        if (currentKey != null)
-        {
-            Destroy(currentKey);
-            currentKey = null;
-        }
-
-        hasKey = false;
+        return inventory;
     }
 }
