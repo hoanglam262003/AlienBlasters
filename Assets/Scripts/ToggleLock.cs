@@ -13,17 +13,17 @@ public class ToggleLock : MonoBehaviour, IInteractable
     }
     public void Interact(Player player)
     {
-        if (!player.HasKey())
-        {
+        var inventory = player.GetInventory();
+
+        if (!inventory.HasItem<Key>())
             return;
-        }
+
         if (unlocked)
-        {
             return;
-        }
+
         Toggle();
-        player.ConsumeKey();
-        player.SetHasKey(false);
+
+        inventory.UseTopItem(player);
     }
     public void Toggle()
     {
