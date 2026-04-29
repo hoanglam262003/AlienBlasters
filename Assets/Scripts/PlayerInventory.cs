@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private Stack<IItem> items = new Stack<IItem>();
+    private List<IItem> items = new List<IItem>();
+    private int currentIndex = -1;
 
     public void AddItem(IItem item)
     {
-        if (items.Count > 0)
+        if (currentIndex >= 0)
         {
-            SetItemActive(items.Peek(), false);
+            SetItemActive(items[currentIndex], false);
         }
 
-        items.Push(item);
+        items.Add(item);
+        currentIndex = items.Count - 1;
 
         SetItemActive(item, true);
 
         Debug.Log($"Picked item: {item.GetType().Name}");
     }
 
-    public void UseTopItem(Player player)
+    public void UseCurrentItem(Player player)
     {
-        if (items.Count == 0) return;
+        if (currentIndex < 0) return;
 
-        var item = items.Pop();
+        var item = items[currentIndex];
 
         item.Use(player);
 
@@ -34,15 +36,33 @@ public class PlayerInventory : MonoBehaviour
             Destroy(mono.gameObject);
         }
 
-        if (items.Count > 0)
+        items.RemoveAt(currentIndex);
+
+        if (items.Count == 0)
         {
-            SetItemActive(items.Peek(), true);
+            currentIndex = -1;
+            return;
         }
+
+        currentIndex = Mathf.Clamp(currentIndex - 1, 0, items.Count - 1);
+        SetItemActive(items[currentIndex], true);
     }
 
-    public IItem PeekItem()
+    public void SwapItem()
     {
-        return items.Count > 0 ? items.Peek() : null;
+        if (items.Count <= 1) return;
+
+        SetItemActive(items[currentIndex], false);
+
+        currentIndex--;
+        if (currentIndex < 0)
+        {
+            currentIndex = items.Count - 1;
+        }
+
+        SetItemActive(items[currentIndex], true);
+
+        Debug.Log($"Swapped to: {items[currentIndex].GetType().Name}");
     }
 
     public bool HasItem<T>() where T : IItem

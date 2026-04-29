@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     private Vector2 originalOffset;
 
     [Header("Interact")]
+    [SerializeField] private Transform holdItemPoint;
     private float interactRange = 1f;
 
     public int playerId { get; private set; }
@@ -105,6 +106,10 @@ public class Player : MonoBehaviour
         if (GameInput.Instance.IsUsePressed())
         {
             HandleUse();
+        }
+        if (GameInput.Instance.IsSwapItemPressed())
+        {
+            inventory.SwapItem();
         }
         isDucking = GameInput.Instance.IsDuckPressed() && isGrounded;
         if (isDucking)
@@ -401,5 +406,10 @@ public class Player : MonoBehaviour
     public PlayerInventory GetInventory()
     {
         return inventory;
+    }
+
+    public Transform GetHoldItemPoint()
+    {
+        return holdItemPoint;
     }
 }

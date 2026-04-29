@@ -23,7 +23,7 @@ public class ToggleLock : MonoBehaviour, IInteractable
 
         Toggle();
 
-        inventory.UseTopItem(player);
+        inventory.UseCurrentItem(player);
     }
     public void Toggle()
     {
