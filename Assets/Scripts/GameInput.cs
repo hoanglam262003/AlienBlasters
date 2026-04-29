@@ -17,6 +17,7 @@ public class GameInput : MonoBehaviour
         Shoot,
         Duck,
         Use,
+        SwapItem,
     }
 
     private PlayerInputActions playerInputActions;
@@ -76,6 +77,8 @@ public class GameInput : MonoBehaviour
                 return playerInputActions.Player.Duck.bindings[0].ToDisplayString();
             case Binding.Use:
                 return playerInputActions.Player.Use.bindings[0].ToDisplayString();
+            case Binding.SwapItem:
+                return playerInputActions.Player.SwapItem.bindings[0].ToDisplayString();
         }
     }
 
@@ -112,6 +115,10 @@ public class GameInput : MonoBehaviour
                 break;
             case Binding.Use:
                 action = playerInputActions.Player.Use;
+                bindingIndex = 0;
+                break;
+            case Binding.SwapItem:
+                action = playerInputActions.Player.SwapItem;
                 bindingIndex = 0;
                 break;
         }
@@ -160,5 +167,10 @@ public class GameInput : MonoBehaviour
     public bool IsUsePressed()
     {
         return playerInputActions.Player.Use.triggered;
+    }
+
+    public bool IsSwapItemPressed()
+    {
+        return playerInputActions.Player.SwapItem.triggered;
     }
 }

@@ -145,6 +145,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""09a6d214-ee74-44ae-899a-eca71a2d17f8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -235,6 +244,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""707e31cf-f09e-4048-93da-3479fdd197f3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +269,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Duck = m_Player.FindAction("Duck", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_SwapItem = m_Player.FindAction("SwapItem", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -335,6 +356,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Duck;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_SwapItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -370,6 +392,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Use".
         /// </summary>
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwapItem".
+        /// </summary>
+        public InputAction @SwapItem => m_Wrapper.m_Player_SwapItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -414,6 +440,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
+            @SwapItem.started += instance.OnSwapItem;
+            @SwapItem.performed += instance.OnSwapItem;
+            @SwapItem.canceled += instance.OnSwapItem;
         }
 
         /// <summary>
@@ -443,6 +472,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
+            @SwapItem.started -= instance.OnSwapItem;
+            @SwapItem.performed -= instance.OnSwapItem;
+            @SwapItem.canceled -= instance.OnSwapItem;
         }
 
         /// <summary>
@@ -525,5 +557,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapItem(InputAction.CallbackContext context);
     }
 }
