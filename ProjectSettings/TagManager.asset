@@ -54,5 +54,8 @@ TagManager:
   - name: Props
     uniqueID: 699151483
     locked: 0
+  - name: Enemies
+    uniqueID: 358386307
+    locked: 0
   m_RenderingLayers:
   - Default
