@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cat : Enemy
 {
-    [SerializeField] private GameObject catBombPrefab;
+    [SerializeField] private CatBomb catBombPrefab;
     [SerializeField] private Transform firePoint;
 
     private void Start()
@@ -12,6 +12,7 @@ public class Cat : Enemy
 
     private void SpawnCatBomb()
     {
-        Instantiate(catBombPrefab, firePoint);
+        var catBomb = Instantiate(catBombPrefab, firePoint);
+        catBomb.Launch(Vector2.up + Vector2.left);
     }
 }

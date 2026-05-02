@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cat
   maxHP: 1
-  catBombPrefab: {fileID: 4391780747385159325, guid: c2d2dc5bcd182d94490c88b1896807fa, type: 3}
+  catBombPrefab: {fileID: 1317745372349117588, guid: c2d2dc5bcd182d94490c88b1896807fa, type: 3}
   firePoint: {fileID: 5546526477292526846}
 --- !u!1 &3075699859428243642
 GameObject:
