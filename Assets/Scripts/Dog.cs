@@ -15,7 +15,13 @@ public class Dog : Enemy
         base.Awake();
     }
 
-    public void Shoot()
+    private void Start()
+    {
+        var shootAnimationWrapper = GetComponentInChildren<ShootAnimationWrapper>();
+        shootAnimationWrapper.OnShoot += Shoot;
+    }
+
+    private void Shoot()
     {
 
     }
