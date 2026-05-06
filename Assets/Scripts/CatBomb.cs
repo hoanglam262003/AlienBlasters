@@ -20,4 +20,15 @@ public class CatBomb : MonoBehaviour
         rb.AddForce(direction * forceValue);
         animator.enabled = true;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            Vector2 hitDir = (player.transform.position - transform.position).normalized;
+            player.GetHit(hitDir);
+        }
+
+        Destroy(gameObject);
+    }
 }
