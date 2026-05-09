@@ -11,13 +11,16 @@ public class Blaster : MonoBehaviour
 
     public void TryShoot()
     {
-        if (Time.time < lastShootTime + fireRate)
+        if (GameManager.IsCinematicPlaying == false)
         {
-            return;
-        }
+            if (Time.time < lastShootTime + fireRate)
+            {
+                return;
+            }
 
-        Shoot();
-        lastShootTime = Time.time;
+            Shoot();
+            lastShootTime = Time.time;
+        }
     }
 
     private void Shoot()

@@ -9,14 +9,15 @@ public class KeyReviewController : MonoBehaviour
     [SerializeField] private float moveDuration = 1f;
     [SerializeField] private float reviewTimePerKey = 5f;
     [SerializeField] private CinemachineCamera keyCamera;
+    [SerializeField] private GameManager gameManager;
 
     private bool isReviewing = false;
 
     public void StartReview()
     {
-        Debug.Log("StartReview CALLED");
         if (isReviewing) return;
         isReviewing = true;
+        gameManager.ToggleCinematic(true);
         keyCamera.Priority = 1;
         StopAllCoroutines();
         StartCoroutine(ReviewSequence());
@@ -24,21 +25,19 @@ public class KeyReviewController : MonoBehaviour
 
     private IEnumerator ReviewSequence()
     {
-        Debug.Log("Total keys: " + keys.Length);
         foreach (var key in keys)
         {
             if (key == null)
             {
-                Debug.LogError("Key is NULL!");
                 continue;
             }
-            Debug.Log("Moving to: " + key.name + " | Pos: " + key.position);
             yield return MoveTo(key.position);
             float stayTime = reviewTimePerKey - moveDuration;
             if (stayTime > 0)
                 yield return new WaitForSecondsRealtime(stayTime);
         }
         keyCamera.Priority = -1;
+        gameManager.ToggleCinematic(false);
         isReviewing = false;
     }
 

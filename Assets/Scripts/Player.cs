@@ -95,6 +95,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.IsCinematicPlaying == false)
+        {
+            PlayerAction();
+        }
+    }
+
+    private void PlayerAction()
+    {
         if (GameInput.Instance.IsJumpPressed())
         {
             jumpRequested = true;
@@ -126,12 +134,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isHurt)
+        if (GameManager.IsCinematicPlaying == false)
         {
-            HandleMovement();
-            HandleJump();
-        }
-        UpdateAnimator();
+            if (!isHurt)
+            {
+                HandleMovement();
+                HandleJump();
+            }
+            UpdateAnimator();
+        }   
     }
 
     public void Init(int playerId)
