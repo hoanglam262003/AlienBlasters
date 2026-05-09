@@ -824,6 +824,8 @@ PlayableDirector:
     value: {fileID: 519420033}
   - key: {fileID: 3594232945980008636, guid: fa1df1929246d3740b34fb62d6bf5ef0, type: 2}
     value: {fileID: 2018734861}
+  - key: {fileID: 326765184999382616, guid: fa1df1929246d3740b34fb62d6bf5ef0, type: 2}
+    value: {fileID: 3423107711252466313}
   m_ExposedReferences:
     m_References:
     - 2e0113b2a19339a449407e0f058fb772: {fileID: 1256711402}
@@ -2073,6 +2075,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2222,6 +2225,36 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: a2ba7a652493f3549a9024783608b707, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 519420028}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &538585771
 GameObject:
   m_ObjectHideFlags: 0
@@ -6953,6 +6986,7 @@ MonoBehaviour:
   moveDuration: 1
   reviewTimePerKey: 5
   keyCamera: {fileID: 2018734858}
+  gameManager: {fileID: 3055767151348699792, guid: 809f6d1f2313a194f80056eca7da4b84, type: 3}
 --- !u!114 &2018734861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7826,6 +7860,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809f6d1f2313a194f80056eca7da4b84, type: 3}
+--- !u!114 &3423107711252466313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8906007188767603341, guid: 809f6d1f2313a194f80056eca7da4b84, type: 3}
+  m_PrefabInstance: {fileID: 3423107711252466311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
 --- !u!1001 &3520564386198621694
 PrefabInstance:
   m_ObjectHideFlags: 0
