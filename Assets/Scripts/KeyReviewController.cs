@@ -10,6 +10,8 @@ public class KeyReviewController : MonoBehaviour
     [SerializeField] private float reviewTimePerKey = 5f;
     [SerializeField] private CinemachineCamera keyCamera;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip reviewKeySfx;
 
     private bool isReviewing = false;
 
@@ -32,6 +34,10 @@ public class KeyReviewController : MonoBehaviour
                 continue;
             }
             yield return MoveTo(key.position);
+            if (audioSource != null && reviewKeySfx != null)
+            {
+                audioSource.PlayOneShot(reviewKeySfx);
+            }
             float stayTime = reviewTimePerKey - moveDuration;
             if (stayTime > 0)
                 yield return new WaitForSecondsRealtime(stayTime);
