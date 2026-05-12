@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274624ca50869b6439b636b5c0489d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Key
+  keyPrefab: {fileID: 641549929017974066}
