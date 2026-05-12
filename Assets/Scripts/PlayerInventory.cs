@@ -48,6 +48,14 @@ public class PlayerInventory : MonoBehaviour
         SetItemActive(items[currentIndex], true);
     }
 
+    public IItem GetCurrentItem()
+    {
+        if (currentIndex < 0 || currentIndex >= items.Count)
+            return null;
+
+        return items[currentIndex];
+    }
+
     public void SwapItem()
     {
         if (items.Count <= 1) return;
