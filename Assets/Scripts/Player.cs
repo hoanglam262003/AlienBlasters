@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     [Header("Water")]
     [SerializeField] private float waterMoveMultiplier = 0.6f;
     [SerializeField] private float waterCurrentForce = 3f;
-    [SerializeField] private float waterLinearDamping = 5f;
+    [SerializeField] private float waterLinearDamping = 0.5f;
 
     private bool isInWater;
     private float defaultLinearDamping;
