@@ -286,6 +286,9 @@ MonoBehaviour:
   duckSize: {x: 0.8359375, y: 1}
   duckOffset: {x: 0, y: -0.2}
   holdItemPoint: {fileID: 3704731042424974397}
+  waterMoveMultiplier: 0.6
+  waterCurrentForce: 3
+  waterLinearDamping: 0.5
 --- !u!95 &445373914711136864
 Animator:
   serializedVersion: 7

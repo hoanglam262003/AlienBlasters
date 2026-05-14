@@ -48,6 +48,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform holdItemPoint;
     private float interactRange = 1f;
 
+    [Header("Water")]
+    [SerializeField] private float waterMoveMultiplier = 0.6f;
+    [SerializeField] private float waterCurrentForce = 3f;
+    [SerializeField] private float waterLinearDamping = 0.5f;
+
+    private bool isInWater;
+    private float defaultLinearDamping;
+
     public int playerId { get; private set; }
     public int coinsCollected { get; private set; }
     public int health { get; private set; } = 10;
@@ -83,6 +91,7 @@ public class Player : MonoBehaviour
         originalSize = boxCollider.size;
         originalOffset = boxCollider.offset;
         jumpsRemaining = maxJumps;
+        defaultLinearDamping = rb.linearDamping;
         if (PlayerRegistry.Instance != null)
         {
             PlayerRegistry.Instance.Register(this);
@@ -173,7 +182,19 @@ public class Player : MonoBehaviour
         {
             currentSpeed *= movingPlatformSpeedMultiplier;
         }
-        rb.linearVelocity = new Vector2(moveX * currentSpeed, rb.linearVelocity.y);
+
+        if (isInWater)
+        {
+            currentSpeed *= waterMoveMultiplier;
+        }
+
+        float velocityX = moveX * currentSpeed;
+        if (isInWater)
+        {
+            velocityX -= waterCurrentForce;
+        }
+
+        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
         FlipSprite(moveX);
 
         animator.SetBool(IS_MOVING, Mathf.Abs(moveX) > 0.01f);
@@ -422,5 +443,19 @@ public class Player : MonoBehaviour
     public Transform GetHoldItemPoint()
     {
         return holdItemPoint;
+    }
+
+    public void EnterWater()
+    {
+        isInWater = true;
+
+        rb.linearDamping = waterLinearDamping;
+    }
+
+    public void ExitWater()
+    {
+        isInWater = false;
+
+        rb.linearDamping = defaultLinearDamping;
     }
 }
