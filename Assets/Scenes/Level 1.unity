@@ -1522,7 +1522,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4192eaab7c27343409054db508661a77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5293,7 +5293,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4192eaab7c27343409054db508661a77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6387,6 +6387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1884311264}
   - component: {fileID: 1884311265}
+  - component: {fileID: 1884311266}
   m_Layer: 4
   m_Name: water (1)
   m_TagString: Untagged
@@ -6468,6 +6469,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1884311266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884311263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2fcac3957261a4fa3a5fcaec68d2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterFlowAnimation
+  scrollSpeed: 1
 --- !u!4 &1926951738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7537659300413689903, guid: 5cd8664b337c0fa44b9b85db38bcdb19, type: 3}
@@ -7094,6 +7108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030206278}
   - component: {fileID: 2030206279}
+  - component: {fileID: 2030206280}
   m_Layer: 4
   m_Name: water (2)
   m_TagString: Untagged
@@ -7175,6 +7190,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2030206280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030206277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2fcac3957261a4fa3a5fcaec68d2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterFlowAnimation
+  scrollSpeed: 1
 --- !u!1001 &2057671323
 PrefabInstance:
   m_ObjectHideFlags: 0
