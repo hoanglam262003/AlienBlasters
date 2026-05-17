@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.IsCinematicPlaying == false)
+        if (SceneManager.IsCinematicPlaying == false)
         {
             PlayerAction();
         }
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.IsCinematicPlaying == false)
+        if (SceneManager.IsCinematicPlaying == false)
         {
             if (!isHurt)
             {
@@ -375,7 +375,7 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             PlayerRegistry.Instance.Clear();
             return;
         }

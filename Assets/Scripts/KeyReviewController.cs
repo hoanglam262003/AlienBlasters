@@ -9,7 +9,7 @@ public class KeyReviewController : MonoBehaviour
     [SerializeField] private float moveDuration = 1f;
     [SerializeField] private float reviewTimePerKey = 5f;
     [SerializeField] private CinemachineCamera keyCamera;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private SceneManager sceneManager;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip reviewKeySfx;
 
@@ -19,7 +19,7 @@ public class KeyReviewController : MonoBehaviour
     {
         if (isReviewing) return;
         isReviewing = true;
-        gameManager.ToggleCinematic(true);
+        sceneManager.ToggleCinematic(true);
         keyCamera.Priority = 1;
         StopAllCoroutines();
         StartCoroutine(ReviewSequence());
@@ -43,7 +43,7 @@ public class KeyReviewController : MonoBehaviour
                 yield return new WaitForSecondsRealtime(stayTime);
         }
         keyCamera.Priority = -1;
-        gameManager.ToggleCinematic(false);
+        sceneManager.ToggleCinematic(false);
         isReviewing = false;
     }
 
