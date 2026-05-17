@@ -8,6 +8,6 @@ public class LoadLevelButton : MonoBehaviour
 
     public void Load()
     {
-        SceneManager.LoadScene(levelName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
     }
 }

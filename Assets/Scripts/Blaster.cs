@@ -11,7 +11,7 @@ public class Blaster : MonoBehaviour
 
     public void TryShoot()
     {
-        if (GameManager.IsCinematicPlaying == false)
+        if (SceneManager.IsCinematicPlaying == false)
         {
             if (Time.time < lastShootTime + fireRate)
             {

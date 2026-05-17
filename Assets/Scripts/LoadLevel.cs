@@ -1,16 +1,16 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private string levelName;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetComponent<Player>() != null)
         {
-            SceneManager.LoadScene(levelName);
+            GameManager.Instance.SaveLevel(levelName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
         }
     }
 }

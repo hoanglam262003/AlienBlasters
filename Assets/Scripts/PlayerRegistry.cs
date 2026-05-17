@@ -44,6 +44,6 @@ public class PlayerRegistry : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("Level 1");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level 1");
     }
 }
